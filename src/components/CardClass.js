@@ -4,8 +4,6 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
 
-    // here we can create the state variables, But here we are using redux toolkit to do so 
-
     console.log(props);
   }
 
@@ -26,4 +24,16 @@ class Card extends React.Component {
     );
   }
 }
+
+export const highRatedMovie = (Card) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <label className="absolute">⭐</label>
+        <Card {...props} />
+      </div>
+    );
+  };
+};
+
 export default Card;

@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import Card from "./CardClass";
+import Card, { highRatedMovie } from "./CardClass";
 import { API_URl } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovieItem } from "../utils/movieSlice";
 
 const List = () => {
- 
   const dispatch = useDispatch();
 
   const movies = useSelector((store) => store.movie.movieItems);
+
+  const TopRatedMovie = highRatedMovie(Card);
 
   const fetchAPIData = async () => {
     const data = await fetch(API_URl);
@@ -26,7 +27,12 @@ const List = () => {
         <div className="flex ">
           {/* <Card movieData={movie} /> */}
           {movies.map((x, i) => {
-            return <Card key={i} movieData={x} />;
+            console.log(x);
+            return x.vote_average >= 7 ? (
+              <TopRatedMovie key={i} movieData={x} />
+            ) : (
+              <Card key={i} movieData={x} />
+            );
           })}
         </div>
       </div>
